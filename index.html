@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Método Nicolas</title>
+
+<style>
+:root{--primary:#00ff88;}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
+
+body{background:#000;color:#fff;scroll-behavior:smooth;}
+
+/* HERO */
+.hero{position:relative;height:100vh;overflow:hidden;}
+.hero video{position:absolute;width:100%;height:100%;object-fit:cover;filter:brightness(0.35);}
+.overlay{position:absolute;width:100%;height:100%;background:linear-gradient(transparent,#000);}
+
+.hero-content{
+position:relative;z-index:2;height:100%;
+display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+animation:fadeUp 1s ease;
+}
+
+.hero h1{
+font-size:clamp(32px,6vw,70px);
+font-weight:900;
+}
+
+.hero span{
+background:linear-gradient(90deg,#00ff88,#00ccff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+/* BOTÃO PREMIUM */
+.btn{
+margin-top:20px;
+padding:16px 40px;
+background:linear-gradient(90deg,#00ff88,#00ccff);
+color:#000;
+border-radius:10px;
+text-decoration:none;
+font-weight:800;
+box-shadow:0 0 20px rgba(0,255,136,0.5);
+transition:0.3s;
+}
+
+.btn:hover{
+transform:scale(1.05);
+box-shadow:0 0 40px #00ff88;
+}
+
+/* SEÇÕES */
+.section{
+max-width:1100px;
+margin:auto;
+padding:80px 20px;
+opacity:0;
+transform:translateY(40px);
+transition:1s;
+}
+
+.section.active{
+opacity:1;
+transform:translateY(0);
+}
+
+/* TITULOS PREMIUM */
+.title{
+text-align:center;
+font-size:34px;
+margin-bottom:40px;
+font-weight:800;
+position:relative;
+}
+
+.title::after{
+content:"";
+width:60px;
+height:3px;
+background:linear-gradient(90deg,#00ff88,#00ccff);
+display:block;
+margin:10px auto;
+box-shadow:0 0 10px #00ff88;
+}
+
+/* GRID */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.card{
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(10px);
+padding:25px;
+border-radius:15px;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+box-shadow:0 0 20px #00ff88;
+}
+
+/* VIDEO */
+.video-box{
+width:220px;
+height:390px;
+margin:40px auto;
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 0 40px rgba(0,255,136,0.2);
+}
+
+.video-box video{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+/* IMAGENS */
+.img-box img{
+width:100%;
+border-radius:10px;
+}
+
+/* FORM */
+input, select{
+width:100%;
+padding:12px;
+margin-bottom:10px;
+border:none;
+border-radius:8px;
+}
+
+form{max-width:500px;margin:auto;}
+
+/* WHATS */
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:var(--primary);
+color:#000;
+padding:18px;
+border-radius:50%;
+}
+
+/* ANIMAÇÃO */
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(40px);}
+to{opacity:1;transform:translateY(0);}
+}
+.app-box{
+margin-top:15px;
+padding:15px;
+border-radius:12px;
+background:rgba(255,255,255,0.03);
+text-align:center;
+border:1px solid rgba(0,255,136,0.2);
+}
+
+.app-box img{
+width:80px;
+margin-bottom:10px;
+filter:drop-shadow(0 0 10px #00ff88);
+}
+
+.app-box p{
+font-size:13px;
+color:#ccc;
+}
+.phone{
+width:220px;
+height:420px;
+margin:20px auto;
+border-radius:30px;
+padding:10px;
+background:#111;
+border:2px solid #00ff88;
+box-shadow:0 0 40px #00ff88;
+}
+
+.phone img{
+width:100%;
+height:100%;
+object-fit:cover;
+border-radius:20px;
+}
+.avaliacao-box{
+margin:40px auto;
+max-width:700px;
+text-align:center;
+background:rgba(255,255,255,0.03);
+padding:25px;
+border-radius:15px;
+border:1px solid rgba(0,255,136,0.2);
+box-shadow:0 0 30px rgba(0,255,136,0.1);
+}
+
+.avaliacao-box img{
+width:100%;
+border-radius:12px;
+margin-bottom:20px;
+}
+
+.avaliacao-box p{
+color:#ccc;
+line-height:1.6;
+}
+.cta-fixo{
+position:fixed;
+bottom:90px;
+right:20px;
+background:#00ff88;
+color:#000;
+padding:15px 20px;
+border-radius:10px;
+font-weight:800;
+text-decoration:none;
+box-shadow:0 0 20px #00ff88;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero">
+<video autoplay muted loop>
+<source src="video.mp4">
+</video>
+
+<div class="overlay"></div>
+
+<div class="hero-content">
+<h1>RESULTADO NÃO É SORTE<br><span>É MÉTODO</span></h1>
+<p style="margin-top:10px;">
+Se você não evolui, o problema não é esforço — é falta de método.
+</p>
+<p style="margin-top:10px;">Treino inteligente + avaliação completa + resultado real</p>
+</div>
+<a href="https://wa.me/5531988786990" class="btn">COMEÇAR AGORA</a>
+</div>
+</section>
+<div class="avaliacao-box">
+
+<img src="avaliacao.jpg">
+
+<p>
+Essa não é uma avaliação comum.
+
+Aqui analisamos sua capacidade funcional completa,
+identificando limitações, riscos de lesão e pontos de melhora.
+
+Utilizamos testes específicos como H/Q, análise de força,
+assimetria entre membros, avaliação postural e capacidade aeróbica.
+
+Tudo isso para montar um treino totalmente individualizado,
+seguro e eficiente.
+</p>
+
+</div>
+<!-- SOBRE -->
+<section class="section">
+<h2 class="title">Sobre Mim</h2>
+<p style="text-align:center;max-width:800px;margin:auto;">
+Sou personal trainer especializado em transformação física real.
+<section class="section">
+<h2 class="title">Pra quem é</h2>
+
+<div class="grid">
+<div class="card">Quem não evolui na academia</div>
+<div class="card">Quem sente dor no joelho</div>
+<div class="card">Quem quer resultado de verdade</div>
+</div>
+</section>
+<section class="section">
+<h2 class="title">Pra quem é</h2>
+<section class="section">
+<h2 class="title">Não é para você</h2>
+
+<div class="grid">
+<div class="card">Quem quer resultado sem esforço</div>
+<div class="card">Quem não segue orientação</div>
+</div>
+</section>
+Meu trabalho não é só montar treino, é entender seu corpo de forma completa.
+
+Através de testes específicos como H/Q, análise de força, assimetria e capacidade aeróbica,
+consigo identificar exatamente o que você precisa para evoluir com segurança e resultado.
+
+Aqui você não treina no achismo.
+Você segue um método estruturado para evolução constante.
+</p>
+</section>
+
+<!-- VIDEO -->
+<section class="section">
+<h2 class="title">Entenda o Método</h2>
+
+<div class="video-box">
+<video controls>
+<source src="apresentacao.mp4">
+</video>
+</div>
+
+</section>
+
+<!-- RESULTADOS -->
+<section class="section">
+<h2 class="title">Resultados Reais</h2>
+
+<div class="grid">
+
+<div class="card img-box">
+<h3>Transformação</h3>
+<img src="antes.jpg">
+<p style="font-size:12px;">ANTES</p>
+
+<img src="depois.jpg" style="margin-top:10px;">
+<p style="font-size:12px;">DEPOIS</p>
+</div>
+<section class="section">
+<h2 class="title">Resultados</h2>
+
+<div class="grid">
+<div class="card">+100 alunos atendidos</div>
+<div class="card">+3 anos de experiência</div>
+<div class="card">100% personalizado</div>
+</div>
+</section>
+<div class="card img-box">
+<h3>Na prática</h3>
+<img src="aula.jpg">
+<p style="margin-top:10px;">
+Treino aplicado com acompanhamento real e individual.
+</p>
+</div>
+
+</div>
+</section>
+
+<!-- AVALIAÇÃO -->
+<section class="section">
+<h2 class="title">Avaliação Completa</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Teste H/Q</h3>
+<p>Identifica risco de lesão no joelho.</p>
+</div>
+
+<div class="card">
+<h3>Assimetria</h3>
+<p>Detecta diferença de força entre pernas.</p>
+</div>
+
+<div class="card">
+<h3>Aeróbico</h3>
+<p>Avalia condicionamento físico.</p>
+</div>
+
+<div class="card">
+<h3>Postural</h3>
+<p>Corrige padrões e evita lesão.</p>
+</div>
+
+</div>
+</section>
+<section class="section">
+<h2 class="title">Segurança</h2>
+
+<p style="text-align:center;">
+Treinos estruturados com base em avaliação completa,
+reduzindo risco de lesão e garantindo evolução segura.
+</p>
+</section>
+
+<!-- PLANOS -->
+<section class="section">
+<h2 class="title">Planos</h2>
+
+<div class="grid">
+
+<div class="card">
+
+<h3>Consultoria Online</h3>
+<div class="phone">
+<img id="app" src="mfit1.jpg">
+</div>
+<p>
+Treino personalizado com acompanhamento completo, ajustes semanais
+e suporte direto.
+</p>
+
+<div class="app-box">
+
+<img src="mfit.png">
+
+<p>
+Utilizamos o aplicativo <b>MFIT Personal</b> para controle total do treino,
+evolução e acompanhamento em tempo real.
+</p>
+
+</div>
+
+</div>
+<div class="card">
+<h3>Personal Presencial</h3>
+<p>Caderno exclusivo de progressão com controle total da evolução.</p>
+</div>
+
+<div class="card">
+<h3>Natação</h3>
+<p>Treinamento técnico para evolução e performance.</p>
+</div>
+
+</div>
+</section>
+
+<!-- ANAMNESE -->
+<section class="section">
+<h2 class="title">Avaliação Inicial</h2>
+
+<form>
+<input placeholder="Nome">
+<input placeholder="Idade">
+<input placeholder="Altura">
+<input placeholder="Peso">
+<select>
+<option>Objetivo</option>
+<option>Emagrecer</option>
+<option>Hipertrofia</option>
+</select>
+<input placeholder="Dor no joelho?">
+<input placeholder="Diferença entre pernas?">
+<button class="btn">ENVIAR</button>
+</form>
+
+</section>
+
+<a href="https://wa.me/5531988786990" class="whatsapp">W</a>
+
+<script>
+const sections = document.querySelectorAll('.section');
+
+window.addEventListener('scroll', () => {
+sections.forEach(sec => {
+const top = sec.getBoundingClientRect().top;
+if(top < window.innerHeight - 100){
+sec.classList.add('active');
+}
+});
+});
+</script>
+<script>
+let imagens = ["mfit1.jpg","mfit2.jpg","mfit3.jpg"];
+let i = 0;
+
+setInterval(()=>{
+i = (i+1)%imagens.length;
+document.getElementById("app").src = imagens[i];
+},2000);
+</script>
+<a href="https://wa.me/5531988786990" class="cta-fixo">COMEÇAR</a>
+</body>
+</html>
